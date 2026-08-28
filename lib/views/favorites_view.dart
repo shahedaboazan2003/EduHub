@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/popular_course_card.dart';
-import 'details_view.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});

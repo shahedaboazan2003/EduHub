@@ -73,8 +73,8 @@ class _OnboardingViewState extends State<OnboardingView> {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.48,
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(32),
@@ -93,7 +93,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                 children: [
                   Column(
                     children: [
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         _pages[_currentIndex].title,
                         textAlign: TextAlign.center,
@@ -104,12 +104,12 @@ class _OnboardingViewState extends State<OnboardingView> {
                           color: Color(0xff191C1D),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Text(
                         _pages[_currentIndex].description,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontFamily: 'Plus Jakarta Sans',
+                          fontFamily: 'Inter',
                           fontSize: 18,
                           color: Color(0xff434655),
                           height: 1.5,
@@ -123,14 +123,14 @@ class _OnboardingViewState extends State<OnboardingView> {
                     children: List.generate(
                       _pages.length,
                       (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 3),
+                        duration: Duration(milliseconds: 300),
+                        margin: EdgeInsets.symmetric(horizontal: 3),
                         height: 6,
                         width: _currentIndex == index ? 20 : 6,
                         decoration: BoxDecoration(
                           color: _currentIndex == index
-                              ? const Color(0xFF004AC6)
-                              : const Color(0xFF004AC6).withOpacity(0.2),
+                              ?  Color(0xFF004AC6)
+                              :  Color(0xFF004AC6).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
@@ -151,13 +151,13 @@ class _OnboardingViewState extends State<OnboardingView> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginView(),
+                              builder: (context) =>  LoginView(),
                             ),
                           );
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF1B61EB),
+                        backgroundColor: Color(0xff2563EB),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
@@ -168,10 +168,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                             ? 'Get Started'
                             : 'Next',
                         style: const TextStyle(
-                          fontFamily: 'Plus Jakarta Sans',
+                          fontFamily: 'Inter',
                           fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xffFFFFFF),
                         ),
                       ),
                     ),

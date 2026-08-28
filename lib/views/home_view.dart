@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: Color(0xffF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 20),
@@ -46,8 +46,8 @@ class _HomeViewState extends State<HomeView> {
                           'Good morning,',
                           style: TextStyle(
                             fontFamily: 'Inter',
-                            fontSize: 13,
-                            color: Color(0xFF6C757D),
+                            fontSize: 14,
+                            color: Color(0xff434655),
                           ),
                         ),
                         SizedBox(height: 4),
@@ -55,9 +55,9 @@ class _HomeViewState extends State<HomeView> {
                           'Hello, Emma! 👋',
                           style: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
-                            fontSize: 20,
+                            fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF1E1E1E),
+                            color: Color(0xFF191C1D),
                           ),
                         ),
                       ],
@@ -88,14 +88,14 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.search, color: Color(0xFFA0AEC0)),
-                        SizedBox(width: 10),
+                        Icon(Icons.search, color: Color(0xFF737686)),
+                        SizedBox(width: 18),
                         Text(
                           'Search for courses...',
                           style: TextStyle(
                             fontFamily: 'Inter',
-                            color: Color(0xFFA0AEC0),
-                            fontSize: 14,
+                            color: Color(0xFF737686),
+                            fontSize: 16,
                           ),
                         ),
                       ],

@@ -15,7 +15,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 15), () {
+    Timer(const Duration(seconds: 10), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const OnboardingView()),
@@ -31,7 +31,6 @@ class _SplashViewState extends State<SplashView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
             Container(
               width: 96,
               height: 96,
@@ -66,17 +65,17 @@ class _SplashViewState extends State<SplashView> {
               height: 4,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9999),
-                child: const LinearProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1B61EB)),
+                child: LinearProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF004AC6)),
                   backgroundColor: Color(0xffE1E3E4),
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            const Text(
+            SizedBox(height: 12),
+            Text(
               'Loading...',
               style: TextStyle(
-                fontFamily: 'Plus Jakarta Sans',
+                fontFamily: 'Inter',
                 fontSize: 12,
                 color: Color(0xff565E74),
               ),

@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+
 import '../widgets/main_navigation_bar.dart';
 
 class LoginView extends StatefulWidget {
@@ -21,13 +21,13 @@ class _LoginViewState extends State<LoginView> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/4.png', width: 56, height: 56),
-                const SizedBox(height: 16),
-                const Text(
+                Image.asset('assets/images/4.png', width: 48, height: 48),
+                SizedBox(height: 16),
+                Text(
                   'EduHub',
                   style: TextStyle(
                     fontFamily: 'Plus Jakarta Sans',
@@ -48,24 +48,19 @@ class _LoginViewState extends State<LoginView> {
                     height: 1.4,
                   ),
                 ),
-                const SizedBox(height: 28),
+                SizedBox(height: 28),
 
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFFFFF), // background: #FFFFFF
+                    color: Color(0xFFFFFFFF),
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: const Color(
-                        0x4DC3C6D7,
-                      ), // border: 1px solid #C3C6D74D
-                      width: 1,
-                    ),
-                    boxShadow: const [
+                    border: Border.all(color: Color(0x4DC3C6D7), width: 1),
+                    boxShadow: [
                       BoxShadow(
                         color: Color(
                           0x0D0F172A,
-                        ), // box-shadow: 0px 4px 12px 0px #0F172A0D
+                        ),
                         offset: Offset(0, 4),
                         blurRadius: 12,
                         spreadRadius: 0,
