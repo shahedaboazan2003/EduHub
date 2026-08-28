@@ -154,7 +154,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                               builder: (context) => const LoginView(),
                             ),
                           );
-                          // هنا تضع التوجيه بعد الوصول لشاشة الأخيرة (مثل الانتقال لشاشة اللوجن)
                         }
                       },
                       style: ElevatedButton.styleFrom(

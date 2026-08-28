@@ -16,13 +16,12 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
-      // الشريط العلوي يحتوي على زر العودة والعنوان
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF1E1E1E)),
-          onPressed: () => Navigator.pop(context), // زر العودة للهوم
+          onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'EduHub',
@@ -36,12 +35,11 @@ class _SearchViewState extends State<SearchView> {
       ),
       body: Column(
         children: [
-          // 1. حقل البحث الشغال داخل صفحة البحث
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: TextField(
               controller: searchController,
-              autofocus: true, // يفتح الكيبورد تلقائياً عند دخول الصفحة
+              autofocus: true,
               decoration: InputDecoration(
                 hintText: 'Search courses, skills ....',
                 hintStyle: const TextStyle(
@@ -59,21 +57,20 @@ class _SearchViewState extends State<SearchView> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xFF1B61EB)),
+                  borderSide: const BorderSide(color: Color(0x4DC3C6D7)),
                 ),
               ),
             ),
           ),
-
-          // 2. قائمة الكورسات العمودية باستعمال نفس ودجيت PopularCourseCard
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
-                buildVerticalCard(
+                PopularCourseCard(
+                  isFullWidth: true,
                   imagePath: 'assets/images/popular.png',
                   category: 'Bestseller',
-                  title: 'Data Science Bootcamp: From Zero to Hero',
+                  title: 'Data Science BootCamp: From Zero to Hero',
                   instructor: 'Dr. Emily Chen, Lead Data Scientist',
                   rating: 4.9,
                   studentsCount: '8.5k reviews',
@@ -81,14 +78,13 @@ class _SearchViewState extends State<SearchView> {
                   onTapDetails: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailsView(),
-                      ),
+                      MaterialPageRoute(builder: (context) => DetailsView()),
                     );
                   },
                 ),
-                const SizedBox(height: 16),
-                buildVerticalCard(
+                SizedBox(height: 16),
+                PopularCourseCard(
+                  isFullWidth: true,
                   imagePath: 'assets/images/popular.png',
                   category: 'UI/UX',
                   title: 'Advanced UI/UX Design Patterns',
@@ -99,14 +95,13 @@ class _SearchViewState extends State<SearchView> {
                   onTapDetails: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailsView(),
-                      ),
+                      MaterialPageRoute(builder: (context) => DetailsView()),
                     );
                   },
                 ),
-                const SizedBox(height: 16),
-                buildVerticalCard(
+                SizedBox(height: 16),
+                PopularCourseCard(
+                  isFullWidth: true,
                   imagePath: 'assets/images/popular.png',
                   category: 'New',
                   title: 'Executive Leadership & Strategy',
@@ -117,13 +112,11 @@ class _SearchViewState extends State<SearchView> {
                   onTapDetails: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>  DetailsView(),
-                      ),
+                      MaterialPageRoute(builder: (context) => DetailsView()),
                     );
                   },
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
               ],
             ),
           ),
@@ -132,29 +125,4 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 
-  // ودجيت بسيطة لضمان عرض PopularCourseCard بعرض الصفحة كاملاً
-  Widget buildVerticalCard({
-    required String imagePath,
-    required String category,
-    required String title,
-    required String instructor,
-    required double rating,
-    required String studentsCount,
-    required String price,
-    required VoidCallback onTapDetails,
-  }) {
-    return SizedBox(
-      width: double.infinity,
-      child: PopularCourseCard(
-        imagePath: imagePath,
-        category: category,
-        title: title,
-        instructor: instructor,
-        rating: rating,
-        studentsCount: studentsCount,
-        price: price,
-        onTapDetails: onTapDetails,
-      ),
-    );
-  }
 }

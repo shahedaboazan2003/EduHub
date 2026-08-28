@@ -92,6 +92,7 @@ class _CartViewState extends State<CartView> {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: PopularCourseCard(
+                    isFullWidth: true,
                     imagePath: item['image'],
                     category: item['category'],
                     title: item['title'],
@@ -113,10 +114,7 @@ class _CartViewState extends State<CartView> {
                   ),
                 );
               }).toList(),
-
-            const SizedBox(height: 8),
-
-            // ملخص الفاتورة
+            SizedBox(height: 8),
             if (cartItems.isNotEmpty)
               Container(
                 padding: const EdgeInsets.all(20),

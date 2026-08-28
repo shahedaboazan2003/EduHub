@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../views/cart_view.dart';
+import '../views/favorites_view.dart';
 import '../views/home_view.dart';
+import '../views/profile_view.dart';
 
 class MainNavigationBar extends StatefulWidget {
   const MainNavigationBar({super.key});
@@ -15,8 +17,8 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   final List<Widget> pages = [
     const HomeView(),
     const CartView(),
-    const Center(child: Text('Favorites')),
-    const Center(child: Text('Profile')),
+    const FavoritesView(),
+    const ProfileView(),
   ];
 
   @override

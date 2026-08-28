@@ -192,7 +192,7 @@ class _HomeViewState extends State<HomeView> {
               buildSectionHeader('Popular Courses'),
               SizedBox(height: 12),
               SizedBox(
-                height: 275,
+                height: 290,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.only(left: 20),
@@ -200,7 +200,7 @@ class _HomeViewState extends State<HomeView> {
                     PopularCourseCard(
                       imagePath: 'assets/images/popular.png',
                       category: 'Development',
-                      title: 'Full-stack Web Dev Bootcamp 2024',
+                      title: 'Full-stack Web Dev BootCamp 2024',
                       instructor: 'Dr. Angela Yu',
                       rating: 4.8,
                       studentsCount: '12k students',

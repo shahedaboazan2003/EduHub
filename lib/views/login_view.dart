@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import '../widgets/main_navigation_bar.dart';
 
 class LoginView extends StatefulWidget {
@@ -309,7 +308,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

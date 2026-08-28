@@ -8,11 +8,15 @@ class PopularCourseCard extends StatelessWidget {
   final double rating;
   final String studentsCount;
   final String price;
-  final VoidCallback? onTapDetails;
-  final VoidCallback? onDelete;
+
+  // المتغيرات الأربعة المطلوبة
+  final bool isFullWidth; // 1. لعرض الشاشة
+  final bool isFavorite; // 2. للقلب (أحمر أم رمادي مفرغ)
+  final VoidCallback? onTapDetails; // 3. للديتيلز
+  final VoidCallback? onDelete; // 4. للسلة والحذف
 
   const PopularCourseCard({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.category,
     required this.title,
@@ -20,15 +24,17 @@ class PopularCourseCard extends StatelessWidget {
     required this.rating,
     required this.studentsCount,
     required this.price,
+    this.isFullWidth = false,
+    this.isFavorite = false,
     this.onTapDetails,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    Widget cardContent = Container(
       width: 240,
-      margin: const EdgeInsets.only(right: 16),
+      margin: EdgeInsets.only(right: isFullWidth ? 0 : 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -65,7 +71,7 @@ class PopularCourseCard extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -76,6 +82,23 @@ class PopularCourseCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1E1E1E),
                     ),
+                  ),
+                ),
+              ),
+              // القلب المفرغ أو الاحمر (أعلى اليمين)
+              Positioned(
+                top: 8,
+                right: 8,
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? Colors.red : const Color(0xFF4A5568),
+                    size: 18,
                   ),
                 ),
               ),
@@ -132,9 +155,9 @@ class PopularCourseCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 const Divider(
-                  color: Color(0xFFE2E8F0), // لون رمادي خفيف
-                  thickness: 1, // سمك الخط
-                  height: 16, // مسافة فوق وتحت الخط
+                  color: Color(0xFFE2E8F0),
+                  thickness: 1,
+                  height: 16,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,17 +171,34 @@ class PopularCourseCard extends StatelessWidget {
                         color: Color(0xFF1B61EB),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: onTapDetails,
-                      child: const Text(
-                        'Details',
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF1B61EB),
+                    Row(
+                      children: [
+                        // أيقونة السلة الحمراء (تظهر فقط عند وجود onDelete)
+                        if (onDelete != null) ...[
+                          GestureDetector(
+                            onTap: onDelete,
+                            child: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.red,
+                              size: 18,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                        ],
+                        // زر الديتيلز
+                        GestureDetector(
+                          onTap: onTapDetails,
+                          child: const Text(
+                            'Details',
+                            style: TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1B61EB),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
@@ -168,5 +208,21 @@ class PopularCourseCard extends StatelessWidget {
         ],
       ),
     );
+
+    if (isFullWidth) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 16.0),
+        child: SizedBox(
+          width: double.infinity,
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.topCenter,
+            child: cardContent,
+          ),
+        ),
+      );
+    }
+
+    return cardContent;
   }
 }
