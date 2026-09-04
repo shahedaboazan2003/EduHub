@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// 1. ودجيت الكروت ذات العناوين المغلقة (My Learning, Account, System)
 class ProfileSectionContainer extends StatelessWidget {
   final String title;
   final List<Widget> children;
@@ -17,7 +16,7 @@ class ProfileSectionContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             color: Color(0x08000000),
             blurRadius: 10,
@@ -30,8 +29,8 @@ class ProfileSectionContainer extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: const BoxDecoration(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(
               color: Color(0xFFFAFAFA),
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               border: Border(
@@ -40,11 +39,11 @@ class ProfileSectionContainer extends StatelessWidget {
             ),
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
-                fontSize: 15,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF1E1E1E),
+                color: Color(0xFF191C1D),
               ),
             ),
           ),
@@ -55,34 +54,29 @@ class ProfileSectionContainer extends StatelessWidget {
   }
 }
 
-// 2. ودجيت خيارات القائمة (ListTile)
 class ProfileMenuItem extends StatelessWidget {
   final IconData icon;
   final String title;
   final String? trailingText;
-  final bool isBadge;
-  final VoidCallback onTap;
 
   const ProfileMenuItem({
     super.key,
     required this.icon,
     required this.title,
     this.trailingText,
-    this.isBadge = false,
-    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: const Color(0xFF4A5568), size: 20),
+      leading: Icon(icon, color: Color(0xFF191C1D), size: 20),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontFamily: 'Inter',
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFF1E1E1E),
+          fontSize: 18,
+          fontWeight: FontWeight.w400,
+          color: Color(0xFF191C1D),
         ),
       ),
       trailing: Row(
@@ -90,40 +84,24 @@ class ProfileMenuItem extends StatelessWidget {
         children: [
           if (trailingText != null) ...[
             Container(
-              padding: isBadge
-                  ? const EdgeInsets.symmetric(horizontal: 8, vertical: 2)
-                  : EdgeInsets.zero,
-              decoration: isBadge
-                  ? BoxDecoration(
-                      color: const Color(0xFFE2E8F0),
-                      borderRadius: BorderRadius.circular(10),
-                    )
-                  : null,
               child: Text(
                 trailingText!,
                 style: TextStyle(
                   fontFamily: 'Inter',
                   fontSize: 11,
-                  fontWeight: isBadge ? FontWeight.bold : FontWeight.normal,
-                  color: const Color(0xFF6C757D),
+                  color: Color(0xFF6C757D),
                 ),
               ),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8),
           ],
-          const Icon(
-            Icons.arrow_forward_ios,
-            color: Color(0xFFA0AEC0),
-            size: 12,
-          ),
+          Icon(Icons.arrow_forward_ios, color: Color(0xFFA0AEC0), size: 12),
         ],
       ),
-      onTap: onTap,
     );
   }
 }
 
-// 3. ودجيت مربعات الإحصائيات (Learning Stats)
 class ProfileStatBox extends StatelessWidget {
   final String number;
   final String label;
@@ -133,16 +111,16 @@ class ProfileStatBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8F9FA),
+        color: Color(0xFFF8F9FA),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         children: [
           Text(
             number,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Plus Jakarta Sans',
               fontSize: 22,
               fontWeight: FontWeight.bold,

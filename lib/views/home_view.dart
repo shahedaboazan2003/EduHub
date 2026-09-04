@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/section_header.dart';
 import 'search_view.dart';
 import 'details_view.dart';
 import '../widgets/course_progress_card.dart';
@@ -104,14 +105,14 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               SizedBox(height: 24),
-              buildSectionHeader('Continue Learning'),
+              SectionHeader(title: 'Continue Learning'),
               SizedBox(height: 12),
               SizedBox(
                 height: 220,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
-                  children: const [
+                  padding: EdgeInsets.only(left: 20),
+                  children: [
                     CourseProgressCard(
                       imagePath: 'assets/images/continue.png',
                       title: 'Advanced UI Design Principles',
@@ -162,9 +163,7 @@ class _HomeViewState extends State<HomeView> {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xFF1B61EB)
-                              : Colors.white,
+                          color: isSelected ? Color(0xFF1B61EB) : Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             color: isSelected
@@ -189,13 +188,14 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               SizedBox(height: 24),
-              buildSectionHeader('Popular Courses'),
+
+              SectionHeader(title: 'Popular Courses'),
               SizedBox(height: 12),
               SizedBox(
                 height: 290,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20),
                   children: [
                     PopularCourseCard(
                       imagePath: 'assets/images/popular.png',
@@ -247,7 +247,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               SizedBox(
                 height: 230,
                 child: ListView(
@@ -271,10 +271,8 @@ class _HomeViewState extends State<HomeView> {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-
-              // 7. قسم Top Instructors
-              const Padding(
+              SizedBox(height: 24),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   'Top Instructors',
@@ -286,12 +284,12 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               SizedBox(
                 height: 120,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 20),
+                  padding: EdgeInsets.only(left: 20),
                   children: [
                     TopInstructorCard(
                       imagePath: 'assets/images/instructors.png',
@@ -314,35 +312,6 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildSectionHeader(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontFamily: 'Plus Jakarta Sans',
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1E1E1E),
-            ),
-          ),
-          const Text(
-            'See all',
-            style: TextStyle(
-              fontFamily: 'Inter',
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1B61EB),
-            ),
-          ),
-        ],
       ),
     );
   }

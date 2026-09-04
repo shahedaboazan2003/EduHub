@@ -33,11 +33,12 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF1B61EB),
-        unselectedItemColor: const Color(0xFF6C757D),
+        backgroundColor: Color(0xffF8F9FA),
+        selectedItemColor: Color(0xFF1B61EB),
+        unselectedItemColor: Color(0xFF6C757D),
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home_rounded),
