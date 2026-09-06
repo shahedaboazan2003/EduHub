@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/popular_course_card.dart';
 import 'details_view.dart';
 
@@ -15,15 +16,15 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: Color(0xFFF8F9FA),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E1E1E)),
+          icon: Icon(Icons.arrow_back, color: Color(0xFF1E1E1E)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'EduHub',
           style: TextStyle(
             fontFamily: 'Plus Jakarta Sans',
@@ -124,5 +125,4 @@ class _SearchViewState extends State<SearchView> {
       ),
     );
   }
-
 }

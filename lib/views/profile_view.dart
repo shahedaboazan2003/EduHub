@@ -20,7 +20,7 @@ class ProfileView extends StatelessWidget {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFCBD5E0),
+                  color: Color(0xFFCBD5E0),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -78,12 +78,12 @@ class ProfileView extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: () => Navigator.pop(context),
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFE2E8F0)),
+                    side: BorderSide(color: Color(0xFFE2E8F0)),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Cancel',
                     style: TextStyle(
                       fontFamily: 'Inter',
@@ -94,7 +94,7 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
             ],
           ),
         );
@@ -142,7 +142,7 @@ class ProfileView extends StatelessWidget {
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
-                        child: const CircleAvatar(
+                        child: CircleAvatar(
                           radius: 40,
                           backgroundImage: AssetImage(
                             'assets/images/instructors.png',

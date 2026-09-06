@@ -88,8 +88,8 @@ class ProfileMenuItem extends StatelessWidget {
                 trailingText!,
                 style: TextStyle(
                   fontFamily: 'Inter',
-                  fontSize: 11,
-                  color: Color(0xFF6C757D),
+                  fontSize: 14,
+                  color: Color(0xFF434655),
                 ),
               ),
             ),
@@ -113,7 +113,7 @@ class ProfileStatBox extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: Color(0xFFF8F9FA),
+        color: Color(0xFFF3F4F5),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -122,19 +122,19 @@ class ProfileStatBox extends StatelessWidget {
             number,
             style: TextStyle(
               fontFamily: 'Plus Jakarta Sans',
-              fontSize: 22,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1B61EB),
+              color: Color(0xFF004AC6),
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4),
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'Inter',
-              fontSize: 10,
-              color: Color(0xFF6C757D),
+              fontSize: 12,
+              color: Color(0xFF434655),
               height: 1.2,
             ),
           ),

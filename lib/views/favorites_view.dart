@@ -8,15 +8,14 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: Color(0xFFF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // العنوان العلوي التطبيق
-              const Center(
+              Center(
                 child: Text(
                   'EduHub',
                   style: TextStyle(
@@ -28,8 +27,6 @@ class FavoritesView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
-              // عنوان الصفحة
               const Text(
                 'Saved Courses',
                 style: TextStyle(
@@ -39,12 +36,9 @@ class FavoritesView extends StatelessWidget {
                   color: Color(0xFF1E1E1E),
                 ),
               ),
-              const SizedBox(height: 16),
-
-              // قائمة الكورسات المحفوظة (رأسية بعرض الصفحة كاملة)
+              SizedBox(height: 16),
               ListView(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   PopularCourseCard(
                     isFullWidth: true,
