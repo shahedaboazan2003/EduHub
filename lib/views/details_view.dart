@@ -81,7 +81,7 @@ class _DetailsView extends State<DetailsView> {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.7),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -279,19 +279,19 @@ class _DetailsView extends State<DetailsView> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16),
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xFFE2E8F0)),
+                            border: Border.all(color: Color(0xFFE2E8F0)),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'What you will learn',
                                 style: TextStyle(
                                   fontFamily: 'Plus Jakarta Sans',
@@ -324,8 +324,8 @@ class _DetailsView extends State<DetailsView> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: const BoxDecoration(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
               color: Colors.white,
               border: Border(top: BorderSide(color: Color(0xFFE2E8F0))),
             ),
@@ -334,7 +334,7 @@ class _DetailsView extends State<DetailsView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
                       '\$199.00',
                       style: TextStyle(
@@ -355,32 +355,29 @@ class _DetailsView extends State<DetailsView> {
                     ),
                   ],
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFF1B61EB)),
+                    border: Border.all(color: Color(0xFF1B61EB)),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: IconButton(
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      color: Color(0xFF1B61EB),
-                    ),
+                    icon: Icon(Icons.favorite_border, color: Color(0xFF1B61EB)),
                     onPressed: () {},
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1B61EB),
+                      backgroundColor: Color(0xFF1B61EB),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child: Text(
                       'Add to Cart',
                       style: TextStyle(
                         fontFamily: 'Inter',
