@@ -1,3 +1,7 @@
+import 'package:provider/provider.dart';
+
+import 'providers/auth_provider.dart';
+import 'repos/auth_repository.dart';
 import 'views/login_view.dart';
 
 import 'package:flutter/material.dart';
@@ -8,7 +12,13 @@ import 'views/splash_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-  runApp(const MyApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthProvider(authRepository: getIt<AuthRepository>()),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

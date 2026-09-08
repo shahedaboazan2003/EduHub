@@ -7,9 +7,7 @@ import '../models/login_model.dart';
 class AuthDataSource {
   final Dio dio = GetIt.instance<Dio>();
 
-  Future<Response> login({
-    required LoginModel loginModel,
-  }) async {
+  Future<Response> login({required LoginModel loginModel}) async {
     final response = await dio.post(
       ApiConstants.login,
       data: loginModel.toMap(),
