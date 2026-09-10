@@ -14,4 +14,8 @@ class AppPreferences {
   bool isOnboardingCompleted() {
     return sharedPreferences.getBool(AppKeys.isFirstTimeKey) ?? false;
   }
+
+//   Future<void> resetOnboarding() async {
+//   await sharedPreferences.remove(AppKeys.isFirstTimeKey);
+// }
 }

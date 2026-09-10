@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../core/storage/app_preferences.dart';
 import '../core/storage/secure_session_storage.dart';
+import '../repos/auth_repository.dart';
 
 class AppProvider extends ChangeNotifier {
   final AppPreferences appPreferences;
   final SecureSessionStorage secureSessionStorage;
-
+  final AuthRepository authRepository;
   AppProvider({
     required this.appPreferences,
     required this.secureSessionStorage,
+    required this.authRepository,
   });
 
   bool isLoading = false;
@@ -57,11 +59,11 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> logout() async {
-    await secureSessionStorage.clearSession();
+Future<void> logout() async {
+  await authRepository.logout();
 
-    isLoggedIn = false;
+  isLoggedIn = false;
 
-    notifyListeners();
-  }
+  notifyListeners();
+}
 }

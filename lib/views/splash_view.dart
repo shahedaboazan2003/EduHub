@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 
 import '../providers/app_provider.dart';
+import '../widgets/main_navigation_bar.dart';
 import 'home_view.dart';
 import 'login_view.dart';
 import 'onboarding_view.dart';
@@ -20,9 +21,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Timer(Duration(seconds: 3), () {
-        context.read<AppProvider>().checkAppState();
-      });
+      context.read<AppProvider>().checkAppState();
     });
   }
 
@@ -35,17 +34,17 @@ class _SplashViewState extends State<SplashView> {
             if (appProvider.showOnboarding) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) =>  OnboardingView()),
+                MaterialPageRoute(builder: (context) => OnboardingView()),
               );
             } else if (appProvider.isLoggedIn) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) =>  HomeView()),
+                MaterialPageRoute(builder: (context) => MainNavigationBar()),
               );
             } else {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) =>  LoginView()),
+                MaterialPageRoute(builder: (context) => LoginView()),
               );
             }
           });

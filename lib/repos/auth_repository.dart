@@ -22,4 +22,16 @@ class AuthRepository {
       userSession: UserSession(token: token),
     );
   }
+
+  Future<void> logout() async {
+    final userSession = await secureSessionStorage.getSession();
+
+    if (userSession == null) {
+      return;
+    }
+
+    await authDataSource.logout(token: userSession.token);
+
+    await secureSessionStorage.clearSession();
+  }
 }

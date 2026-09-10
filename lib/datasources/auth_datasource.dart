@@ -15,4 +15,17 @@ class AuthDataSource {
 
     return response;
   }
+
+  Future<Response> logout({required String token}) async {
+  final response = await dio.post(
+    ApiConstants.logout,
+    options: Options(
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    ),
+  );
+
+  return response;
+}
 }

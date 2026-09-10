@@ -14,7 +14,7 @@ import 'views/splash_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-
+  //  await getIt<AppPreferences>().resetOnboarding();
   runApp(
     MultiProvider(
       providers: [
@@ -25,6 +25,7 @@ void main() async {
           create: (_) => AppProvider(
             appPreferences: getIt<AppPreferences>(),
             secureSessionStorage: getIt<SecureSessionStorage>(),
+            authRepository: getIt<AuthRepository>(),
           ),
         ),
       ],

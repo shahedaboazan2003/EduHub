@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/app_provider.dart';
 import 'login_view.dart';
 
 class OnboardingItem {
@@ -15,7 +17,7 @@ class OnboardingItem {
 }
 
 class OnboardingView extends StatefulWidget {
-  const OnboardingView({Key? key}) : super(key: key);
+  const OnboardingView({super.key});
 
   @override
   State<OnboardingView> createState() => _OnboardingViewState();
@@ -129,8 +131,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                         width: _currentIndex == index ? 20 : 6,
                         decoration: BoxDecoration(
                           color: _currentIndex == index
-                              ?  Color(0xFF004AC6)
-                              :  Color(0xFF004AC6).withOpacity(0.2),
+                              ? Color(0xFF004AC6)
+                              : Color(0xFF004AC6).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
@@ -141,13 +143,19 @@ class _OnboardingViewState extends State<OnboardingView> {
                     width: double.infinity,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_currentIndex < _pages.length - 1) {
                           _pageController.nextPage(
                             duration: Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         } else {
+                          await context
+                              .read<AppProvider>()
+                              .completeOnboarding();
+
+                          if (!context.mounted) return;
+
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -167,7 +175,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         _currentIndex == _pages.length - 1
                             ? 'Get Started'
                             : 'Next',
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
