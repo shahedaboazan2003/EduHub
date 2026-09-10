@@ -1,8 +1,10 @@
 import 'package:provider/provider.dart';
 
+import 'core/storage/app_preferences.dart';
+import 'core/storage/secure_session_storage.dart';
+import 'providers/app_provider.dart';
 import 'providers/auth_provider.dart';
 import 'repos/auth_repository.dart';
-import 'views/login_view.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,8 +16,18 @@ void main() async {
   await setup();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => AuthProvider(authRepository: getIt<AuthRepository>()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(authRepository: getIt<AuthRepository>()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppProvider(
+            appPreferences: getIt<AppPreferences>(),
+            secureSessionStorage: getIt<SecureSessionStorage>(),
+          ),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -24,9 +36,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginView());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: SplashView());
   }
 }

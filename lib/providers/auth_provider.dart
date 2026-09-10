@@ -4,6 +4,7 @@ import '../models/login_model.dart';
 import '../repos/auth_repository.dart';
 
 class AuthProvider extends ChangeNotifier {
+
   final AuthRepository authRepository;
 
   AuthProvider({required this.authRepository});
@@ -26,12 +27,15 @@ class AuthProvider extends ChangeNotifier {
       await authRepository.login(loginModel: loginModel);
 
       isLoggedIn = true;
+
+      isLoading = false;
+      notifyListeners();
     } catch (e) {
+      print(e);
       errorMessage = "Login failed";
       isLoggedIn = false;
+      isLoading = false;
+      notifyListeners();
     }
-
-    isLoading = false;
-    notifyListeners();
   }
 }
