@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../providers/user_provider.dart';
 import '../widgets/main_navigation_bar.dart';
 import '../providers/auth_provider.dart';
 import '../repos/auth_repository.dart';
@@ -213,6 +214,7 @@ class _LoginViewState extends State<LoginView> {
                                   if (!context.mounted) return;
 
                                   if (authProvider.isLoggedIn) {
+                                    await context.read<UserProvider>().getProfile();
                                     Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
                                         builder: (_) => MainNavigationBar(),

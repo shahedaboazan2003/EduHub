@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/user_provider.dart';
 import '../widgets/section_header.dart';
 import 'search_view.dart';
 import 'details_view.dart';
@@ -16,6 +18,15 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UserProvider>().getProfile();
+    });
+  }
+
   int selectedCategoryIndex = 0;
 
   final List<String> categories = [
@@ -53,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Hello, Emma! 👋',
+                          'Hello, ${context.watch<UserProvider>().user?.firstName ?? ''}! 👋',
                           style: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
                             fontSize: 28,
@@ -65,7 +76,13 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     CircleAvatar(
                       radius: 22,
-                      backgroundImage: AssetImage('assets/images/user.png'),
+                      backgroundImage:
+                          context.watch<UserProvider>().user != null
+                          ? NetworkImage(
+                              context.watch<UserProvider>().user!.profileImage,
+                            )
+                          : const AssetImage('assets/images/user.png')
+                                as ImageProvider,
                     ),
                   ],
                 ),
