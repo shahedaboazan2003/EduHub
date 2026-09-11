@@ -13,9 +13,15 @@ import '../constants/api_constants.dart';
 import '../storage/secure_session_storage.dart';
 import '../storage/app_preferences.dart';
 
+import 'package:hive/hive.dart';
+
+import '../../datasources/cart_local_datasource.dart';
+import '../../models/cart_item.dart';
+import '../../repos/cart_repository.dart';
+
 final GetIt getIt = GetIt.instance;
 
-Future<void> setup() async {
+Future<void> setup({required Box<CartItem> cartBox}) async {
   getIt.registerSingleton<Dio>(Dio(BaseOptions(baseUrl: ApiConstants.baseUrl)));
 
   getIt.registerSingleton<AuthDataSource>(AuthDataSource());
@@ -46,5 +52,12 @@ Future<void> setup() async {
       courseDataSource: getIt<CourseDataSource>(),
       secureSessionStorage: getIt<SecureSessionStorage>(),
     ),
+  );
+  getIt.registerSingleton<CartLocalDataSource>(
+    CartLocalDataSource(cartBox: cartBox),
+  );
+
+  getIt.registerSingleton<CartRepository>(
+    CartRepository(cartLocalDataSource: getIt<CartLocalDataSource>()),
   );
 }

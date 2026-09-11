@@ -78,8 +78,8 @@ class _CartViewState extends State<CartView> {
                     rating: course.rating,
                     studentsCount: '${course.enrolledStudents} students',
                     price: course.price.toString(),
-                    onDelete: () {
-                      cartProvider.removeFromCart(course);
+                    onDelete: () async {
+                      await cartProvider.removeFromCart(course);
                     },
                     onTapDetails: () {
                       Navigator.push(

@@ -1,25 +1,77 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+import 'package:hive/hive.dart';
 
-import 'package:flutter/foundation.dart';
+part 'course_model.g.dart';
 
-import 'review_model.dart';
+@HiveType(typeId: 0)
+class ReviewModel {
+  @HiveField(0)
+  final String reviewerName;
 
+  @HiveField(1)
+  final String reviewDate;
+
+  @HiveField(2)
+  final String reviewContent;
+
+  ReviewModel({
+    required this.reviewerName,
+    required this.reviewDate,
+    required this.reviewContent,
+  });
+
+  factory ReviewModel.fromMap(Map<String, dynamic> map) {
+    return ReviewModel(
+      reviewerName: map['reviewer_name'] as String,
+      reviewDate: map['review_date'] as String,
+      reviewContent: map['review_content'] as String,
+    );
+  }
+}
+
+@HiveType(typeId: 1)
 class CourseModel {
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String description;
+
+  @HiveField(3)
   final String category;
+
+  @HiveField(4)
   final String instructorName;
+
+  @HiveField(5)
   final String instructorTitle;
+
+  @HiveField(6)
   final int price;
+
+  @HiveField(7)
   final String image;
+
+  @HiveField(8)
   final int enrolledStudents;
+
+  @HiveField(9)
   final double rating;
+
+  @HiveField(10)
   final int reviewsCount;
+
+  @HiveField(11)
   final List<String> whatYouWillLearn;
+
+  @HiveField(12)
   final String lastUpdated;
+
+  @HiveField(13)
   final List<ReviewModel> reviews;
+
   CourseModel({
     required this.id,
     required this.name,
@@ -37,130 +89,24 @@ class CourseModel {
     required this.reviews,
   });
 
-  CourseModel copyWith({
-    int? id,
-    String? name,
-    String? description,
-    String? category,
-    String? instructorName,
-    String? instructorTitle,
-    int? price,
-    String? image,
-    int? enrolledStudents,
-    double? rating,
-    int? reviewsCount,
-    List<String>? whatYouWillLearn,
-    String? lastUpdated,
-    List<ReviewModel>? reviews,
-  }) {
+  factory CourseModel.fromMap(Map<String, dynamic> map) {
     return CourseModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      category: category ?? this.category,
-      instructorName: instructorName ?? this.instructorName,
-      instructorTitle: instructorTitle ?? this.instructorTitle,
-      price: price ?? this.price,
-      image: image ?? this.image,
-      enrolledStudents: enrolledStudents ?? this.enrolledStudents,
-      rating: rating ?? this.rating,
-      reviewsCount: reviewsCount ?? this.reviewsCount,
-      whatYouWillLearn: whatYouWillLearn ?? this.whatYouWillLearn,
-      lastUpdated: lastUpdated ?? this.lastUpdated,
-      reviews: reviews ?? this.reviews,
+      id: map['id'] as int,
+      name: map['name'] as String,
+      description: map['description'] as String,
+      category: map['category'] as String,
+      instructorName: map['instructor_name'] as String,
+      instructorTitle: map['instructor_title'] as String,
+      price: map['price'] as int,
+      image: map['image'] as String,
+      enrolledStudents: map['enrolled_students'] as int,
+      rating: (map['rating'] as num).toDouble(),
+      reviewsCount: map['reviews_count'] as int,
+      whatYouWillLearn: List<String>.from(map['what_you_will_learn'] as List),
+      lastUpdated: map['last_updated'] as String,
+      reviews: (map['reviews'] as List)
+          .map((review) => ReviewModel.fromMap(review as Map<String, dynamic>))
+          .toList(),
     );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'description': description,
-      'category': category,
-      'instructorName': instructorName,
-      'instructorTitle': instructorTitle,
-      'price': price,
-      'image': image,
-      'enrolledStudents': enrolledStudents,
-      'rating': rating,
-      'reviewsCount': reviewsCount,
-      'whatYouWillLearn': whatYouWillLearn,
-      'lastUpdated': lastUpdated,
-      'reviews': reviews.map((x) => x.toMap()).toList(),
-    };
-  }
-
-factory CourseModel.fromMap(Map<String, dynamic> map) {
-  return CourseModel(
-    id: map['id'] as int,
-    name: map['name'] as String,
-    description: map['description'] as String,
-    category: map['category'] as String,
-    instructorName: map['instructor_name'] as String,
-    instructorTitle: map['instructor_title'] as String,
-    price: map['price'] as int,
-    image: map['image'] as String,
-    enrolledStudents: map['enrolled_students'] as int,
-    rating: (map['rating'] as num).toDouble(),
-    reviewsCount: map['reviews_count'] as int,
-    whatYouWillLearn:
-        List<String>.from(map['what_you_will_learn'] as List),
-    lastUpdated: map['last_updated'] as String,
-    reviews: (map['reviews'] as List)
-        .map(
-          (review) => ReviewModel.fromMap(
-            review as Map<String, dynamic>,
-          ),
-        )
-        .toList(),
-  );
-}
-
-  String toJson() => json.encode(toMap());
-
-  factory CourseModel.fromJson(String source) => CourseModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'CourseModel(id: $id, name: $name, description: $description, category: $category, instructorName: $instructorName, instructorTitle: $instructorTitle, price: $price, image: $image, enrolledStudents: $enrolledStudents, rating: $rating, reviewsCount: $reviewsCount, whatYouWillLearn: $whatYouWillLearn, lastUpdated: $lastUpdated, reviews: $reviews)';
-  }
-
-  @override
-  bool operator ==(covariant CourseModel other) {
-    if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.description == description &&
-      other.category == category &&
-      other.instructorName == instructorName &&
-      other.instructorTitle == instructorTitle &&
-      other.price == price &&
-      other.image == image &&
-      other.enrolledStudents == enrolledStudents &&
-      other.rating == rating &&
-      other.reviewsCount == reviewsCount &&
-      listEquals(other.whatYouWillLearn, whatYouWillLearn) &&
-      other.lastUpdated == lastUpdated &&
-      listEquals(other.reviews, reviews);
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-      name.hashCode ^
-      description.hashCode ^
-      category.hashCode ^
-      instructorName.hashCode ^
-      instructorTitle.hashCode ^
-      price.hashCode ^
-      image.hashCode ^
-      enrolledStudents.hashCode ^
-      rating.hashCode ^
-      reviewsCount.hashCode ^
-      whatYouWillLearn.hashCode ^
-      lastUpdated.hashCode ^
-      reviews.hashCode;
   }
 }

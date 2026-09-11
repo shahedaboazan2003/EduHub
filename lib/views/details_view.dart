@@ -406,11 +406,19 @@ class _DetailsView extends State<DetailsView> {
                 SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      context.read<CartProvider>().addToCart(course);
+                    onPressed: () async {
+                      final isAdded = await context
+                          .read<CartProvider>()
+                          .addToCart(course);
 
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Course added to cart')),
+                        SnackBar(
+                          content: Text(
+                            isAdded
+                                ? 'Course added to cart'
+                                : 'Course is already in your cart',
+                          ),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
