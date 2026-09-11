@@ -7,6 +7,7 @@ import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/course_provider.dart';
 import 'providers/favorite_provider.dart';
+import 'providers/search_provider.dart';
 import 'providers/user_provider.dart';
 import 'repos/auth_repository.dart';
 
@@ -67,6 +68,10 @@ void main() async {
           create: (_) =>
               FavoriteProvider(favoriteRepository: getIt<FavoriteRepository>())
                 ..loadFavoriteCourses(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              SearchProvider(courseProvider: getIt<CourseProvider>()),
         ),
       ],
       child: const MyApp(),
