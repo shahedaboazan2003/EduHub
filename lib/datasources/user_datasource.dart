@@ -5,17 +5,18 @@ import '../core/constants/api_constants.dart';
 
 class UserDataSource {
   final Dio dio = GetIt.instance<Dio>();
-
   Future<Response> getProfile({required String token}) async {
-    final response = await dio.get(
-      ApiConstants.profile,
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
-    );
+  final response = await dio.get(
+    ApiConstants.profile,
+    options: Options(
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    ),
+  );
 
-    return response;
-  }
+  print('PROFILE RESPONSE: ${response.data}');
+
+  return response;
+}
 }

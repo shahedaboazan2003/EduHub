@@ -16,7 +16,10 @@ import 'views/splash_view.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-  //  await getIt<AppPreferences>().resetOnboarding();
+  final session = await getIt<SecureSessionStorage>().getSession();
+
+  print('MY TOKEN: ${session?.token}');
+  // await getIt<AppPreferences>().resetOnboarding();
   runApp(
     MultiProvider(
       providers: [

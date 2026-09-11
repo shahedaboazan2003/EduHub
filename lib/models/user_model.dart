@@ -51,17 +51,17 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
-      id: map['id'] as int,
-      firstName: map['firstName'] as String,
-      lastName: map['lastName'] as String,
-      email: map['email'] as String,
-      city: map['city'] as String,
-      country: map['country'] as String,
-      profileImage: map['profileImage'] as String,
-    );
-  }
+factory UserModel.fromMap(Map<String, dynamic> map) {
+  return UserModel(
+    id: map['id'] as int,
+    firstName: map['first_name'] as String,
+    lastName: map['last_name'] as String,
+    email: map['email'] as String,
+    city: map['city'] as String,
+    country: map['country'] as String,
+    profileImage: map['profile_image'] as String,
+  );
+}
 
   String toJson() => json.encode(toMap());
 

@@ -12,8 +12,19 @@ class SecureSessionStorage {
     await secureStorage.write(key: AppKeys.tokenKey, value: userSession.token);
   }
 
+  // Future<UserSession?> getSession() async {
+  //   String? token = await secureStorage.read(key: AppKeys.tokenKey);
+
+  //   if (token != null) {
+  //     return UserSession(token: token);
+  //   }
+
+  //   return null;
+  // }
   Future<UserSession?> getSession() async {
     String? token = await secureStorage.read(key: AppKeys.tokenKey);
+
+    print('TOKEN EXISTS: ${token != null}');
 
     if (token != null) {
       return UserSession(token: token);

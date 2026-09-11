@@ -12,6 +12,22 @@ class UserProvider extends ChangeNotifier {
   bool isLoading = false;
   String errorMessage = '';
 
+  // Future<void> getProfile() async {
+  //   isLoading = true;
+  //   errorMessage = '';
+  //   notifyListeners();
+
+  //   try {
+  //     user = await userRepository.getProfile();
+  //   } catch (e) {
+  //     print(e);
+  //     errorMessage = 'Failed to load profile';
+  //   } finally {
+  //     isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
+
   Future<void> getProfile() async {
     isLoading = true;
     errorMessage = '';
@@ -19,8 +35,12 @@ class UserProvider extends ChangeNotifier {
 
     try {
       user = await userRepository.getProfile();
+
+      print('USER NAME: ${user?.firstName}');
+      print('USER EMAIL: ${user?.email}');
+      print('USER IMAGE: ${user?.profileImage}');
     } catch (e) {
-      print(e);
+      print('PROFILE ERROR: $e');
       errorMessage = 'Failed to load profile';
     } finally {
       isLoading = false;
