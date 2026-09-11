@@ -8,12 +8,10 @@ class PopularCourseCard extends StatelessWidget {
   final double rating;
   final String studentsCount;
   final String price;
-
-  // المتغيرات الأربعة المطلوبة
-  final bool isFullWidth; // 1. لعرض الشاشة
-  final bool isFavorite; // 2. للقلب (أحمر أم رمادي مفرغ)
-  final VoidCallback? onTapDetails; // 3. للديتيلز
-  final VoidCallback? onDelete; // 4. للسلة والحذف
+  final bool isFullWidth;
+  final bool isFavorite;
+  final VoidCallback? onTapDetails;
+  final VoidCallback? onDelete;
 
   const PopularCourseCard({
     super.key,
@@ -38,7 +36,7 @@ class PopularCourseCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             color: Color(0x0D000000),
             blurRadius: 10,
@@ -66,17 +64,14 @@ class PopularCourseCard extends StatelessWidget {
                 bottom: 8,
                 left: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
                     category,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
@@ -85,13 +80,12 @@ class PopularCourseCard extends StatelessWidget {
                   ),
                 ),
               ),
-              // القلب المفرغ أو الاحمر (أعلى اليمين)
               Positioned(
                 top: 8,
                 right: 8,
                 child: Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: const BoxDecoration(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
@@ -105,7 +99,7 @@ class PopularCourseCard extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,7 +107,7 @@ class PopularCourseCard extends StatelessWidget {
                   title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Plus Jakarta Sans',
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -129,11 +123,11 @@ class PopularCourseCard extends StatelessWidget {
                     color: Color(0xFF6C757D),
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.star, size: 14, color: Color(0xFFFFC107)),
-                    const SizedBox(width: 4),
+                    Icon(Icons.star, size: 14, color: Color(0xFFFFC107)),
+                    SizedBox(width: 4),
                     Text(
                       '$rating',
                       style: const TextStyle(
@@ -142,10 +136,10 @@ class PopularCourseCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 4),
+                    SizedBox(width: 4),
                     Text(
                       '($studentsCount)',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 11,
                         color: Color(0xFF6C757D),
@@ -153,18 +147,14 @@ class PopularCourseCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
-                const Divider(
-                  color: Color(0xFFE2E8F0),
-                  thickness: 1,
-                  height: 16,
-                ),
+                SizedBox(height: 12),
+                Divider(color: Color(0xFFE2E8F0), thickness: 1, height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '\$$price',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -173,7 +163,6 @@ class PopularCourseCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        // أيقونة السلة الحمراء (تظهر فقط عند وجود onDelete)
                         if (onDelete != null) ...[
                           GestureDetector(
                             onTap: onDelete,
@@ -185,7 +174,6 @@ class PopularCourseCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 12),
                         ],
-                        // زر الديتيلز
                         GestureDetector(
                           onTap: onTapDetails,
                           child: const Text(
@@ -211,7 +199,7 @@ class PopularCourseCard extends StatelessWidget {
 
     if (isFullWidth) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
+        padding: EdgeInsets.only(bottom: 16.0),
         child: SizedBox(
           width: double.infinity,
           child: FittedBox(

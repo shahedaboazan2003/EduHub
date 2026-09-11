@@ -4,12 +4,14 @@ import 'core/storage/app_preferences.dart';
 import 'core/storage/secure_session_storage.dart';
 import 'providers/app_provider.dart';
 import 'providers/auth_provider.dart';
+import 'providers/course_provider.dart';
 import 'providers/user_provider.dart';
 import 'repos/auth_repository.dart';
 
 import 'package:flutter/material.dart';
 
 import 'core/config/di.dart';
+import 'repos/course_repository.dart';
 import 'repos/user_repository.dart';
 import 'views/splash_view.dart';
 
@@ -35,6 +37,10 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => UserProvider(userRepository: getIt<UserRepository>()),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              CourseProvider(courseRepository: getIt<CourseRepository>()),
         ),
       ],
       child: const MyApp(),

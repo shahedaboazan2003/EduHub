@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/user_provider.dart';
+import '../providers/course_provider.dart';
 import '../widgets/section_header.dart';
 import 'search_view.dart';
 import 'details_view.dart';
@@ -24,17 +25,9 @@ class _HomeViewState extends State<HomeView> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<UserProvider>().getProfile();
+      context.read<CourseProvider>().getCourses();
     });
   }
-
-  int selectedCategoryIndex = 0;
-
-  final List<String> categories = [
-    'Development',
-    'Business',
-    'Design',
-    'Marketing',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +35,12 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: Color(0xffF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 20),
+          padding:  EdgeInsets.symmetric(vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:  EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -164,40 +157,30 @@ class _HomeViewState extends State<HomeView> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.only(left: 20),
-                  itemCount: categories.length,
+                  itemCount: context.watch<CourseProvider>().categories.length,
                   itemBuilder: (context, index) {
-                    bool isSelected = selectedCategoryIndex == index;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedCategoryIndex = index;
-                        });
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 10),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 18,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isSelected ? Color(0xFF1B61EB) : Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: isSelected
-                                ? Colors.transparent
-                                : const Color(0xFFE2E8F0),
-                          ),
-                        ),
-                        child: Text(
-                          categories[index],
-                          style: TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: isSelected
-                                ? Colors.white
-                                : const Color(0xFF1E1E1E),
-                          ),
+                    final categories = context
+                        .watch<CourseProvider>()
+                        .categories;
+
+                    return Container(
+                      margin: EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color:  Color(0xFFE2E8F0)),
+                      ),
+                      child: Text(
+                        categories[index],
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF1E1E1E),
                         ),
                       ),
                     );
