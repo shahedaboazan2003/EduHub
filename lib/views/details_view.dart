@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/details_widgets.dart';
 import '../models/course_model.dart';
 import '../models/course_model.dart';
 import '../widgets/details_widgets.dart';
+import '../providers/cart_provider.dart';
 
 class DetailsView extends StatefulWidget {
   final CourseModel course;
@@ -404,7 +406,13 @@ class _DetailsView extends State<DetailsView> {
                 SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartProvider>().addToCart(course);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Course added to cart')),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF1B61EB),
                       shape: RoundedRectangleBorder(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
 import '../widgets/popular_course_card.dart';
 import 'details_view.dart';
 
@@ -11,39 +13,18 @@ class CartView extends StatefulWidget {
 }
 
 class _CartViewState extends State<CartView> {
-  final TextEditingController promoController = TextEditingController();
   double discountPercentage = 0.20;
-
-  List<Map<String, dynamic>> cartItems = [
-    {
-      'image': 'assets/images/popular.png',
-      'category': 'Computer Science',
-      'title': 'Advanced Data Structures and Algorithms',
-      'instructor': 'Dr. Sarah Chen',
-      'rating': 4.9,
-      'studentsCount': '8.5k',
-      'price': 89.99,
-    },
-    {
-      'image': 'assets/images/popular.png',
-      'category': 'UI/UX',
-      'title': 'UX/UI Masterclass: Enterprise Design Systems',
-      'instructor': 'James Rodriguez',
-      'rating': 4.8,
-      'studentsCount': '3.2k',
-      'price': 129.99,
-    },
-  ];
-
-  double get subtotal =>
-      cartItems.fold(0, (sum, item) => sum + (item['price'] as double));
-  double get discountAmount => subtotal * discountPercentage;
-  double get total => subtotal - discountAmount;
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = context.watch<CartProvider>();
+
+    final cartItems = cartProvider.cartItems;
+    final subtotal = cartProvider.subtotal;
+    final discountAmount = subtotal * discountPercentage;
+    final total = subtotal - discountAmount;
     return Scaffold(
-      /* backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: Color(0xFFF8F9FA),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -85,8 +66,7 @@ class _CartViewState extends State<CartView> {
               )
             else
               ...cartItems.asMap().entries.map((entry) {
-                int index = entry.key;
-                var item = entry.value;
+                final course = entry.value;
                 return Padding(
                   padding: EdgeInsets.only(bottom: 16.0),
                   child: PopularCourseCard(
@@ -99,9 +79,7 @@ class _CartViewState extends State<CartView> {
                     studentsCount: '${course.enrolledStudents} students',
                     price: course.price.toString(),
                     onDelete: () {
-                      setState(() {
-                        cartItems.removeAt(index);
-                      });
+                      cartProvider.removeFromCart(course);
                     },
                     onTapDetails: () {
                       Navigator.push(
@@ -117,7 +95,7 @@ class _CartViewState extends State<CartView> {
             SizedBox(height: 8),
             if (cartItems.isNotEmpty)
               Container(
-                padding:  EdgeInsets.all(20),
+                padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
@@ -230,7 +208,6 @@ class _CartViewState extends State<CartView> {
                           child: SizedBox(
                             height: 44,
                             child: TextField(
-                              controller: promoController,
                               decoration: InputDecoration(
                                 hintText: 'Enter code',
                                 hintStyle: TextStyle(
@@ -321,7 +298,7 @@ class _CartViewState extends State<CartView> {
               ),
           ],
         ),
-      ), */
+      ),
     );
   }
 }

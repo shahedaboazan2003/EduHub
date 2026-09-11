@@ -4,6 +4,7 @@ import 'core/storage/app_preferences.dart';
 import 'core/storage/secure_session_storage.dart';
 import 'providers/app_provider.dart';
 import 'providers/auth_provider.dart';
+import 'providers/cart_provider.dart';
 import 'providers/course_provider.dart';
 import 'providers/user_provider.dart';
 import 'repos/auth_repository.dart';
@@ -42,6 +43,7 @@ void main() async {
           create: (_) =>
               CourseProvider(courseRepository: getIt<CourseRepository>()),
         ),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: const MyApp(),
     ),
