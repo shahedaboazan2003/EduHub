@@ -26,8 +26,8 @@ class FavoritesView extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16),
+              Text(
                 'Saved Courses',
                 style: TextStyle(
                   fontFamily: 'Plus Jakarta Sans',
@@ -37,50 +37,8 @@ class FavoritesView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              ListView(
-                shrinkWrap: true,
-                children: [
-                  PopularCourseCard(
-                    isFullWidth: true,
-                    imagePath: 'assets/images/popular.png',
-                    category: 'AI & Data',
-                    title: 'Advanced Machine Learning Algorithms',
-                    instructor: 'Dr. Emily Chen',
-                    rating: 4.9,
-                    studentsCount: '1.2k',
-                    price: '149',
-                  ),
-                  PopularCourseCard(
-                    isFullWidth: true,
-                    imagePath: 'assets/images/popular.png',
-                    category: 'UI/UX Design',
-                    title:
-                        'UI/UX Design Masterclass: From Wireframe to Prototype',
-                    instructor: 'Sarah Jenkins',
-                    rating: 4.8,
-                    studentsCount: '850',
-                    price: '129',
-                  ),
-                  PopularCourseCard(
-                    isFullWidth: true,
-                    imagePath: 'assets/images/popular.png',
-                    category: 'Business',
-                    title: 'Strategic Leadership for the Modern Enterprise',
-                    instructor: 'Prof. Michael Chang',
-                    rating: 4.7,
-                    studentsCount: '2.1k',
-                    price: '199',
-                  ),
-                  PopularCourseCard(
-                    isFullWidth: true,
-                    imagePath: 'assets/images/popular.png',
-                    category: 'Development',
-                    title: 'Full-Stack Web Development BootCamp',
-                    instructor: 'Alex Rodriguez',
-                    rating: 4.9,
-                    studentsCount: '3.4k',
-                    price: '89',
-                  ),
+              ListView(shrinkWrap: true, children: [
+
                 ],
               ),
             ],

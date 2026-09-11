@@ -12,7 +12,7 @@ class CartView extends StatefulWidget {
 
 class _CartViewState extends State<CartView> {
   final TextEditingController promoController = TextEditingController();
-  double discountPercentage = 0.20; // 20% خصم
+  double discountPercentage = 0.20;
 
   List<Map<String, dynamic>> cartItems = [
     {
@@ -43,12 +43,12 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      /* backgroundColor: Color(0xFFF8F9FA),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: const Text(
+        title: Text(
           'EduHub',
           style: TextStyle(
             fontFamily: 'Plus Jakarta Sans',
@@ -59,11 +59,11 @@ class _CartViewState extends State<CartView> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Shopping Cart',
               style: TextStyle(
                 fontFamily: 'Plus Jakarta Sans',
@@ -72,11 +72,9 @@ class _CartViewState extends State<CartView> {
                 color: Color(0xFF1E1E1E),
               ),
             ),
-            const SizedBox(height: 16),
-
-            // قائمة العناصر
+            SizedBox(height: 16),
             if (cartItems.isEmpty)
-              const Center(
+              Center(
                 child: Padding(
                   padding: EdgeInsets.all(40.0),
                   child: Text(
@@ -90,16 +88,16 @@ class _CartViewState extends State<CartView> {
                 int index = entry.key;
                 var item = entry.value;
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+                  padding: EdgeInsets.only(bottom: 16.0),
                   child: PopularCourseCard(
                     isFullWidth: true,
-                    imagePath: item['image'],
-                    category: item['category'],
-                    title: item['title'],
-                    instructor: item['instructor'],
-                    rating: item['rating'],
-                    studentsCount: item['studentsCount'],
-                    price: item['price'].toStringAsFixed(2),
+                    imagePath: course.image,
+                    category: course.category,
+                    title: course.name,
+                    instructor: course.instructorName,
+                    rating: course.rating,
+                    studentsCount: '${course.enrolledStudents} students',
+                    price: course.price.toString(),
                     onDelete: () {
                       setState(() {
                         cartItems.removeAt(index);
@@ -108,7 +106,9 @@ class _CartViewState extends State<CartView> {
                     onTapDetails: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => DetailsView()),
+                        MaterialPageRoute(
+                          builder: (context) => DetailsView(course: course),
+                        ),
                       );
                     },
                   ),
@@ -117,11 +117,11 @@ class _CartViewState extends State<CartView> {
             SizedBox(height: 8),
             if (cartItems.isNotEmpty)
               Container(
-                padding: const EdgeInsets.all(20),
+                padding:  EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
                       color: Color(0x0A000000),
                       blurRadius: 10,
@@ -132,7 +132,7 @@ class _CartViewState extends State<CartView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Summary',
                       style: TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
@@ -141,11 +141,11 @@ class _CartViewState extends State<CartView> {
                         color: Color(0xFF1E1E1E),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Subtotal',
                           style: TextStyle(
                             fontFamily: 'Inter',
@@ -155,7 +155,7 @@ class _CartViewState extends State<CartView> {
                         ),
                         Text(
                           '\$${subtotal.toStringAsFixed(2)}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
@@ -163,11 +163,11 @@ class _CartViewState extends State<CartView> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Discount (PROMO20)',
                           style: TextStyle(
                             fontFamily: 'Inter',
@@ -177,7 +177,7 @@ class _CartViewState extends State<CartView> {
                         ),
                         Text(
                           '-\$${discountAmount.toStringAsFixed(2)}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF1B61EB),
@@ -186,14 +186,14 @@ class _CartViewState extends State<CartView> {
                         ),
                       ],
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(vertical: 16),
                       child: Divider(color: Color(0xFFE2E8F0)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           'Total',
                           style: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
@@ -204,7 +204,7 @@ class _CartViewState extends State<CartView> {
                         ),
                         Text(
                           '\$${total.toStringAsFixed(2)}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -213,8 +213,8 @@ class _CartViewState extends State<CartView> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: 20),
+                    Text(
                       'Promo Code',
                       style: TextStyle(
                         fontFamily: 'Inter',
@@ -223,7 +223,7 @@ class _CartViewState extends State<CartView> {
                         color: Color(0xFF1E1E1E),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(
@@ -233,23 +233,23 @@ class _CartViewState extends State<CartView> {
                               controller: promoController,
                               decoration: InputDecoration(
                                 hintText: 'Enter code',
-                                hintStyle: const TextStyle(
+                                hintStyle: TextStyle(
                                   fontFamily: 'Inter',
                                   fontSize: 12,
                                   color: Color(0xFFA0AEC0),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(
+                                contentPadding: EdgeInsets.symmetric(
                                   horizontal: 12,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Color(0xFFE2E8F0),
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Color(0xFFE2E8F0),
                                   ),
                                 ),
@@ -257,13 +257,13 @@ class _CartViewState extends State<CartView> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         SizedBox(
                           height: 44,
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFE2E8F0),
+                              backgroundColor: Color(0xFFE2E8F0),
                               elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -321,7 +321,7 @@ class _CartViewState extends State<CartView> {
               ),
           ],
         ),
-      ),
+      ), */
     );
   }
 }

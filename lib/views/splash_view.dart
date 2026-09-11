@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'dart:async';
-
 import '../providers/app_provider.dart';
 import '../widgets/main_navigation_bar.dart';
-import 'home_view.dart';
 import 'login_view.dart';
 import 'onboarding_view.dart';
 
@@ -69,8 +66,8 @@ class _SplashViewState extends State<SplashView> {
                     height: 96,
                   ),
                 ),
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16),
+                Text(
                   'EduHub',
                   style: TextStyle(
                     fontFamily: 'Plus Jakarta Sans',

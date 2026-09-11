@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/details_widgets.dart';
+import '../models/course_model.dart';
+import '../models/course_model.dart';
+import '../widgets/details_widgets.dart';
 
 class DetailsView extends StatefulWidget {
-  const DetailsView({super.key});
+  final CourseModel course;
+
+  const DetailsView({super.key, required this.course});
 
   @override
   State<DetailsView> createState() => _DetailsView();
@@ -14,8 +19,9 @@ class _DetailsView extends State<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final course = widget.course;
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: Color(0xFFF8F9FA),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -43,8 +49,8 @@ class _DetailsView extends State<DetailsView> {
                   Stack(
                     alignment: Alignment.center,
                     children: [
-                      Image.asset(
-                        'assets/images/details.png',
+                      Image.network(
+                        course.image,
                         width: double.infinity,
                         height: 200,
                         fit: BoxFit.cover,
@@ -76,7 +82,7 @@ class _DetailsView extends State<DetailsView> {
                         bottom: 12,
                         right: 12,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 8,
                             vertical: 4,
                           ),
@@ -102,16 +108,10 @@ class _DetailsView extends State<DetailsView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: const [
-                            CourseTag(text: 'Development'),
-                            SizedBox(width: 8),
-                            CourseTag(text: 'Python'),
-                          ],
-                        ),
+                        Row(children: [CourseTag(text: course.category)]),
                         SizedBox(height: 12),
                         Text(
-                          'The Complete Python Developer: Zero to Mastery',
+                          course.name,
                           style: TextStyle(
                             fontFamily: 'Plus Jakarta Sans',
                             fontSize: 20,
@@ -129,7 +129,7 @@ class _DetailsView extends State<DetailsView> {
                             ),
                             SizedBox(width: 4),
                             Text(
-                              '4.8 ',
+                              '${course.rating} ',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 fontWeight: FontWeight.bold,
@@ -137,7 +137,7 @@ class _DetailsView extends State<DetailsView> {
                               ),
                             ),
                             Text(
-                              '(12,045 ratings)',
+                              '(${course.reviewsCount} reviews)',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF6C757D),
@@ -152,7 +152,7 @@ class _DetailsView extends State<DetailsView> {
                             ),
                             SizedBox(width: 4),
                             Text(
-                              '25,432 Students',
+                              '${course.enrolledStudents} Students',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF6C757D),
@@ -171,7 +171,7 @@ class _DetailsView extends State<DetailsView> {
                             ),
                             SizedBox(width: 4),
                             Text(
-                              'Last updated Jan 2024',
+                              'Last updated ${course.lastUpdated}',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF6C757D),
@@ -201,7 +201,7 @@ class _DetailsView extends State<DetailsView> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Andrei Neagoie',
+                                    course.instructorName,
                                     style: TextStyle(
                                       fontFamily: 'Plus Jakarta Sans',
                                       fontSize: 14,
@@ -211,7 +211,7 @@ class _DetailsView extends State<DetailsView> {
                                   ),
                                   SizedBox(height: 2),
                                   Text(
-                                    'Senior Software Engineer',
+                                    course.instructorTitle,
                                     style: TextStyle(
                                       fontFamily: 'Inter',
                                       fontSize: 12,
@@ -246,76 +246,111 @@ class _DetailsView extends State<DetailsView> {
                         ),
                         Divider(height: 1, color: Color(0xFFE2E8F0)),
                         SizedBox(height: 20),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: const Color(0xFFE2E8F0)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Course Description',
-                                style: TextStyle(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF1E1E1E),
+                        if (selectedTab == 0) ...[
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Color(0xFFE2E8F0)),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Course Description',
+                                  style: TextStyle(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1E1E1E),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'Master Python by building real-world projects. This comprehensive course takes you from absolute beginner to advanced developer. You will learn modern Python 3, object-oriented programming, machine learning basics, web development, and more. Designed for those seeking a professional career in tech.',
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontSize: 12,
-                                  color: Color(0xFF6C757D),
-                                  height: 1.5,
+                                SizedBox(height: 8),
+                                Text(
+                                  course.description,
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: 12,
+                                    color: Color(0xFF6C757D),
+                                    height: 1.5,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Color(0xFFE2E8F0)),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'What you will learn',
-                                style: TextStyle(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF1E1E1E),
+
+                          SizedBox(height: 16),
+
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Color(0xFFE2E8F0)),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'What you will learn',
+                                  style: TextStyle(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1E1E1E),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              LearnPointItem(
-                                text: 'Build 10+ real-world Python projects to add to your portfolio.',
-                              ),
-                              LearnPointItem(
-                                text: 'Master advanced Python concepts like Decorators, Generators, and Asynchronous Programming.',
-                              ),
-                              LearnPointItem(
-                                text: 'Understand web development with Flask and web scraping with BeautifulSoup.',
-                              ),
-                              LearnPointItem(
-                                text: 'Learn how to write clean, professional code using industry best practices.',
-                              ),
-                            ],
+
+                                SizedBox(height: 12),
+
+                                ...course.whatYouWillLearn.map(
+                                  (item) => LearnPointItem(text: item),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        ] else if (selectedTab == 1) ...[
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Color(0xFFE2E8F0)),
+                            ),
+                            child: Text(
+                              'Curriculum is not available yet.',
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 12,
+                                color: Color(0xFF6C757D),
+                              ),
+                            ),
+                          ),
+                        ] else if (selectedTab == 2) ...[
+                          Text(
+                            '${course.reviews.length} Reviews',
+                            style: TextStyle(
+                              fontFamily: 'Plus Jakarta Sans',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1E1E1E),
+                            ),
+                          ),
+
+                          SizedBox(height: 12),
+
+                          ...course.reviews.map(
+                            (review) => ReviewItem(
+                              reviewerName: review.reviewerName,
+                              reviewDate: review.reviewDate,
+                              reviewContent: review.reviewContent,
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ),
@@ -345,7 +380,7 @@ class _DetailsView extends State<DetailsView> {
                       ),
                     ),
                     Text(
-                      '\$94.99',
+                      '\$${course.price}',
                       style: TextStyle(
                         fontFamily: 'Plus Jakarta Sans',
                         fontSize: 18,

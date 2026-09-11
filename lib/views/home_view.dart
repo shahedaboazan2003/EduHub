@@ -35,12 +35,12 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: Color(0xffF8F9FA),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding:  EdgeInsets.symmetric(vertical: 20),
+          padding: EdgeInsets.symmetric(vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -119,23 +119,22 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(height: 12),
               SizedBox(
                 height: 220,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.only(left: 20),
-                  children: [
-                    CourseProgressCard(
-                      imagePath: 'assets/images/continue.png',
-                      title: 'Advanced UI Design Principles',
-                      lessonText: 'Lesson 12 of 20 • Visual Hierarchy',
-                      progress: 0.65,
-                    ),
-                    CourseProgressCard(
-                      imagePath: 'assets/images/continue.png',
-                      title: 'React for Beginners',
-                      lessonText: 'Lesson 4 of 15 • Components',
-                      progress: 0.30,
-                    ),
-                  ],
+                  itemCount: context.watch<CourseProvider>().courses.length,
+                  itemBuilder: (context, index) {
+                    final course = context
+                        .watch<CourseProvider>()
+                        .courses[index];
+
+                    return CourseProgressCard(
+                      imagePath: course.image,
+                      title: course.name,
+                      lessonText: 'Continue Learning',
+                      progress: 0.0,
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 24),
@@ -170,9 +169,9 @@ class _HomeViewState extends State<HomeView> {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Color(0xFFE2E8F0),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color:  Color(0xFFE2E8F0)),
+                        border: Border.all(color: Color(0xFFE2E8F0)),
                       ),
                       child: Text(
                         categories[index],
@@ -190,48 +189,38 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(height: 24),
 
               SectionHeader(title: 'Popular Courses'),
+
               SizedBox(height: 12),
+
               SizedBox(
                 height: 290,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.only(left: 20),
-                  children: [
-                    PopularCourseCard(
-                      imagePath: 'assets/images/popular.png',
-                      category: 'Development',
-                      title: 'Full-stack Web Dev BootCamp 2024',
-                      instructor: 'Dr. Angela Yu',
-                      rating: 4.8,
-                      studentsCount: '12k students',
-                      price: '89.99',
+                  itemCount: context.watch<CourseProvider>().courses.length,
+                  itemBuilder: (context, index) {
+                    final course = context
+                        .watch<CourseProvider>()
+                        .courses[index];
+
+                    return PopularCourseCard(
+                      imagePath: course.image,
+                      category: course.category,
+                      title: course.name,
+                      instructor: course.instructorName,
+                      rating: course.rating,
+                      studentsCount: '${course.enrolledStudents} students',
+                      price: course.price.toString(),
                       onTapDetails: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DetailsView(),
+                            builder: (context) => DetailsView(course: course),
                           ),
                         );
                       },
-                    ),
-                    PopularCourseCard(
-                      imagePath: 'assets/images/popular.png',
-                      category: 'Marketing',
-                      title: 'Complete Digital Marketing Course',
-                      instructor: 'Sarah Lee',
-                      rating: 4.9,
-                      studentsCount: '8k students',
-                      price: '64.99',
-                      onTapDetails: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsView(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 24),
@@ -250,25 +239,23 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(height: 12),
               SizedBox(
                 height: 230,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.only(left: 20),
-                  children: [
-                    RecommendedCourseCard(
-                      imagePath: 'assets/images/recommended.png',
-                      title: 'UI/UX Masterclass: From Beginner to Pro',
-                      rating: 4.9,
-                      reviewsCount: '4k',
-                      price: '59.99',
-                    ),
-                    RecommendedCourseCard(
-                      imagePath: 'assets/images/recommended.png',
-                      title: 'Python for Data Science & Machine Learning',
-                      rating: 4.8,
-                      reviewsCount: '22k',
-                      price: '99.99',
-                    ),
-                  ],
+                  itemCount: context.watch<CourseProvider>().courses.length,
+                  itemBuilder: (context, index) {
+                    final course = context
+                        .watch<CourseProvider>()
+                        .courses[index];
+
+                    return RecommendedCourseCard(
+                      imagePath: course.image,
+                      title: course.name,
+                      rating: course.rating,
+                      reviewsCount: '${course.reviewsCount}',
+                      price: course.price.toString(),
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 24),
@@ -287,26 +274,21 @@ class _HomeViewState extends State<HomeView> {
               SizedBox(height: 12),
               SizedBox(
                 height: 120,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.only(left: 20),
-                  children: [
-                    TopInstructorCard(
+                  itemCount: context.watch<CourseProvider>().courses.length,
+                  itemBuilder: (context, index) {
+                    final course = context
+                        .watch<CourseProvider>()
+                        .courses[index];
+
+                    return TopInstructorCard(
                       imagePath: 'assets/images/instructors.png',
-                      name: 'Dr. Angela Yu',
-                      field: 'Development',
-                    ),
-                    TopInstructorCard(
-                      imagePath: 'assets/images/instructors.png',
-                      name: 'Sarah J.',
-                      field: 'Marketing',
-                    ),
-                    TopInstructorCard(
-                      imagePath: 'assets/images/instructors.png',
-                      name: 'David Chen',
-                      field: 'Business',
-                    ),
-                  ],
+                      name: course.instructorName,
+                      field: course.category,
+                    );
+                  },
                 ),
               ),
             ],

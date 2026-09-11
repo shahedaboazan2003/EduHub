@@ -50,10 +50,8 @@ class PopularCourseCard extends StatelessWidget {
           Stack(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
-                child: Image.asset(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                child: Image.network(
                   imagePath,
                   height: 130,
                   width: double.infinity,
@@ -91,7 +89,7 @@ class PopularCourseCard extends StatelessWidget {
                   ),
                   child: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : const Color(0xFF4A5568),
+                    color: isFavorite ? Colors.red : Color(0xFF4A5568),
                     size: 18,
                   ),
                 ),
@@ -114,10 +112,10 @@ class PopularCourseCard extends StatelessWidget {
                     color: Color(0xFF1E1E1E),
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 Text(
                   'By $instructor',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 11,
                     color: Color(0xFF6C757D),
@@ -130,7 +128,7 @@ class PopularCourseCard extends StatelessWidget {
                     SizedBox(width: 4),
                     Text(
                       '$rating',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -166,17 +164,17 @@ class PopularCourseCard extends StatelessWidget {
                         if (onDelete != null) ...[
                           GestureDetector(
                             onTap: onDelete,
-                            child: const Icon(
+                            child: Icon(
                               Icons.delete_outline,
                               color: Colors.red,
                               size: 18,
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          SizedBox(width: 12),
                         ],
                         GestureDetector(
                           onTap: onTapDetails,
-                          child: const Text(
+                          child: Text(
                             'Details',
                             style: TextStyle(
                               fontFamily: 'Inter',

@@ -8,13 +8,13 @@ class RecommendedCourseCard extends StatelessWidget {
   final String price;
 
   const RecommendedCourseCard({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.title,
     required this.rating,
     required this.reviewsCount,
     required this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class RecommendedCourseCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-            child: Image.asset(
+            child: Image.network(
               imagePath,
               height: 110,
               width: double.infinity,
@@ -67,7 +67,7 @@ class RecommendedCourseCard extends StatelessWidget {
                     SizedBox(width: 4),
                     Text(
                       '$rating',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
