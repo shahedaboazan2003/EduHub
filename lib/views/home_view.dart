@@ -10,6 +10,7 @@ import '../widgets/course_progress_card.dart';
 import '../widgets/popular_course_card.dart';
 import '../widgets/recommended_course_card.dart';
 import '../widgets/top_instructor_card.dart';
+import '../providers/favorite_provider.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -211,6 +212,14 @@ class _HomeViewState extends State<HomeView> {
                       rating: course.rating,
                       studentsCount: '${course.enrolledStudents} students',
                       price: course.price.toString(),
+                      isFavorite: context
+                          .watch<FavoriteProvider>()
+                          .isCourseFavorite(course),
+                      onToggleFavorite: () async {
+                        await context.read<FavoriteProvider>().toggleFavorite(
+                          course: course,
+                        );
+                      },
                       onTapDetails: () {
                         Navigator.push(
                           context,

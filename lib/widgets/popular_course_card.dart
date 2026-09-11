@@ -12,6 +12,7 @@ class PopularCourseCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onTapDetails;
   final VoidCallback? onDelete;
+  final VoidCallback? onToggleFavorite;
 
   const PopularCourseCard({
     super.key,
@@ -26,6 +27,7 @@ class PopularCourseCard extends StatelessWidget {
     this.isFavorite = false,
     this.onTapDetails,
     this.onDelete,
+    this.onToggleFavorite,
   });
 
   @override
@@ -81,16 +83,19 @@ class PopularCourseCard extends StatelessWidget {
               Positioned(
                 top: 8,
                 right: 8,
-                child: Container(
-                  padding: EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
-                    color: isFavorite ? Colors.red : Color(0xFF4A5568),
-                    size: 18,
+                child: GestureDetector(
+                  onTap: onToggleFavorite,
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : Color(0xFF4A5568),
+                      size: 18,
+                    ),
                   ),
                 ),
               ),

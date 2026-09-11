@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../datasources/auth_datasource.dart';
 import '../../datasources/course_datasource.dart';
 import '../../datasources/user_datasource.dart';
+import '../../models/course_model.dart';
 import '../../repos/auth_repository.dart';
 import '../../repos/course_repository.dart';
 import '../../repos/user_repository.dart';
@@ -18,10 +19,15 @@ import 'package:hive/hive.dart';
 import '../../datasources/cart_local_datasource.dart';
 import '../../models/cart_item.dart';
 import '../../repos/cart_repository.dart';
+import '../../datasources/favorite_local_datasource.dart';
+import '../../repos/favorite_repository.dart';
 
 final GetIt getIt = GetIt.instance;
 
-Future<void> setup({required Box<CartItem> cartBox}) async {
+Future<void> setup({
+  required Box<CartItem> cartBox,
+  required Box<CourseModel> favoriteBox,
+}) async {
   getIt.registerSingleton<Dio>(Dio(BaseOptions(baseUrl: ApiConstants.baseUrl)));
 
   getIt.registerSingleton<AuthDataSource>(AuthDataSource());
@@ -59,5 +65,14 @@ Future<void> setup({required Box<CartItem> cartBox}) async {
 
   getIt.registerSingleton<CartRepository>(
     CartRepository(cartLocalDataSource: getIt<CartLocalDataSource>()),
+  );
+  getIt.registerSingleton<FavoriteLocalDataSource>(
+    FavoriteLocalDataSource(favoriteBox: favoriteBox),
+  );
+
+  getIt.registerSingleton<FavoriteRepository>(
+    FavoriteRepository(
+      favoriteLocalDataSource: getIt<FavoriteLocalDataSource>(),
+    ),
   );
 }

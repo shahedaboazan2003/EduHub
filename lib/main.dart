@@ -6,6 +6,7 @@ import 'providers/app_provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/cart_provider.dart';
 import 'providers/course_provider.dart';
+import 'providers/favorite_provider.dart';
 import 'providers/user_provider.dart';
 import 'repos/auth_repository.dart';
 
@@ -15,6 +16,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/config/di.dart';
 import 'repos/cart_repository.dart';
 import 'repos/course_repository.dart';
+import 'repos/favorite_repository.dart';
 import 'repos/user_repository.dart';
 import 'views/splash_view.dart';
 import 'models/course_model.dart';
@@ -30,8 +32,8 @@ void main() async {
   Hive.registerAdapter(CartItemAdapter());
 
   final cartBox = await Hive.openBox<CartItem>('cart_box');
-
-  await setup(cartBox: cartBox);
+  final favoriteBox = await Hive.openBox<CourseModel>('favorite_box');
+  await setup(cartBox: cartBox, favoriteBox: favoriteBox);
   final session = await getIt<SecureSessionStorage>().getSession();
 
   print('MY TOKEN: ${session?.token}');
@@ -60,6 +62,11 @@ void main() async {
           create: (_) =>
               CartProvider(cartRepository: getIt<CartRepository>())
                 ..loadCartItems(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              FavoriteProvider(favoriteRepository: getIt<FavoriteRepository>())
+                ..loadFavoriteCourses(),
         ),
       ],
       child: const MyApp(),
