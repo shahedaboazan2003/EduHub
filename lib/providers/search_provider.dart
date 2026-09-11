@@ -4,9 +4,9 @@ import '../models/course_model.dart';
 import 'course_provider.dart';
 
 class SearchProvider extends ChangeNotifier {
-  final CourseProvider courseProvider;
+  // final CourseProvider courseProvider;
 
-  SearchProvider({required this.courseProvider});
+  // SearchProvider({required this.courseProvider});
 
   String searchQuery = '';
 
@@ -20,15 +20,15 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<CourseModel> get searchResults {
-    if (searchQuery.trim().isEmpty) {
-      return courseProvider.courses;
-    }
+  // List<CourseModel> get searchResults {
+  //   if (searchQuery.trim().isEmpty) {
+  //     return courseProvider.courses;
+  //   }
 
-    final query = searchQuery.trim().toLowerCase();
+  //   final query = searchQuery.trim().toLowerCase();
 
-    return courseProvider.courses.where((course) {
-      return course.name.toLowerCase().contains(query);
-    }).toList();
-  }
+  //   return courseProvider.courses.where((course) {
+  //     return course.name.toLowerCase().contains(query);
+  //   }).toList();
+  // }
 }

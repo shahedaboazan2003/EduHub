@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/course_provider.dart';
 import '../providers/favorite_provider.dart';
 import '../providers/search_provider.dart';
 import '../widgets/popular_course_card.dart';
@@ -19,7 +20,15 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     final searchProvider = context.watch<SearchProvider>();
-    final searchedCourses = searchProvider.searchResults;
+    // final searchedCourses = searchProvider.searchResults;
+    final courseProvider = context.watch<CourseProvider>();
+    final searchedCourses = searchProvider.searchQuery.trim().isEmpty
+        ? courseProvider.courses
+        : courseProvider.courses.where((course) {
+            return course.name.toLowerCase().contains(
+              searchProvider.searchQuery.trim().toLowerCase(),
+            );
+          }).toList();
     return Scaffold(
       backgroundColor: Color(0xFFF8F9FA),
       appBar: AppBar(

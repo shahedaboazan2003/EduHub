@@ -69,10 +69,11 @@ void main() async {
               FavoriteProvider(favoriteRepository: getIt<FavoriteRepository>())
                 ..loadFavoriteCourses(),
         ),
-        ChangeNotifierProvider(
-          create: (_) =>
-              SearchProvider(courseProvider: getIt<CourseProvider>()),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (_) =>
+        //       SearchProvider(courseProvider: getIt<CourseProvider>()),
+        // ),
+        ChangeNotifierProvider(create: (_) => SearchProvider()),
       ],
       child: const MyApp(),
     ),
